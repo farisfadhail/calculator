@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Kalkulator</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div class="calculator">
+			<div class="screen">
+				<input type="text" id="display" disabled />
+			</div>
+			<div class="buttons">
+				<button class="grey" onclick="percentage()">%</button>
+				<button class="grey" onclick="pi()"><span style="font-size: large">&#960;</span></button>
+				<button class="grey" onclick="clearDisplay()">C</button>
+				<button class="grey" onclick="backspace()">&larr;</button>
+
+				<button class="grey" onclick="oneDivideTo()"><span style="font-size: medium">1/x</span></button>
+				<button class="grey" onclick="squared()">
+					<span style="font-size: medium">x<sup style="font-size: small">2</sup></span>
+				</button>
+				<button class="grey" onclick="radic()">
+					<span style="font-size: medium"><sup style="font-size: xx-small">2</sup>&radic;x</span>
+				</button>
+				<button class="orange" onclick="insertValue('/')">÷</button>
+
+				<button onclick="insertValue('7')">7</button>
+				<button onclick="insertValue('8')">8</button>
+				<button onclick="insertValue('9')">9</button>
+				<button class="orange" onclick="insertValue('*')">x</button>
+
+				<button onclick="insertValue('4')">4</button>
+				<button onclick="insertValue('5')">5</button>
+				<button onclick="insertValue('6')">6</button>
+				<button class="orange" onclick="insertValue('-')">-</button>
+
+				<button onclick="insertValue('1')">1</button>
+				<button onclick="insertValue('2')">2</button>
+				<button onclick="insertValue('3')">3</button>
+				<button class="orange" onclick="insertValue('+')">+</button>
+
+				<button class="grey" onclick="changeSign()"><span style="font-size: large">&#177;</span></button>
+				<button onclick="insertValue('0')">0</button>
+				<button class="grey" onclick="insertValue('.')">.</button>
+				<button class="equal" onclick="calculate()">=</button>
+			</div>
+		</div>
+		<script>
+			let expression = "";
+			let display = document.getElementById("display");
+
+			function insertValue(val) {
+				expression += val;
+				display.value = expression;
+			}
+
+			function clearDisplay() {
+				expression = "";
+				display.value = "";
+			}
+
+			function backspace() {
+				expression = expression.slice(0, -1);
+				display.value = expression;
+			}
+
+			function calculate() {
+				let result = eval(expression);
+				display.value = result;
+				expression = "";
+			}
+
+			function squared() {
+				expression *= expression;
+				display.value = expression;
+				expression = "";
+			}
+
+			function percentage() {
+				expression /= 100;
+				display.value = expression;
+				expression = "";
+			}
+
+			function oneDivideTo() {
+				let result = 1 / expression;
+				display.value = result;
+				expression = "";
+			}
+
+			function radic() {
+				let result = Math.sqrt(expression);
+				display.value = result;
+				expression = "";
+			}
+
+			function pi() {
+				expression *= Math.PI;
+				display.value = expression;
+				expression = "";
+			}
+
+			function changeSign() {
+				if (expression.substring(0, 1) == "-") {
+					expression = expression.substring(1, expression.length);
+				} else {
+					expression = "-" + expression;
+				}
+
+				display.value = expression;
+			}
+		</script>
+	</body>
+</html>
